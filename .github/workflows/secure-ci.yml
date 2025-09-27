@@ -24,7 +24,7 @@ jobs:
         uses: returntocorp/semgrep-action@v1
         with:
           config: "p/ci, security-audit, secrets"  
-          fail_on_severity: ERROR  # use standard CI rules including secret-detection
+          args: "--fail-on HIGH,CRITICAL"  # use standard CI rules including secret-detection
           # optional: add severity threshold or custom rules
 
       - name: Set up Docker Buildx
