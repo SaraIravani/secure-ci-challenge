@@ -1,0 +1,51 @@
+name: Secure CI/CD Demo
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js (cache deps)
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies (for local semgrep tests)
+        run: npm ci || npm install
+
+      - name: Run Semgrep (static code analysis)
+        uses: returntocorp/semgrep-action@v2
+        with:
+          config: "p/ci"   # use standard CI rules including secret-detection
+          # optional: add severity threshold or custom rules
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Build Docker image
+        run: docker build -t secure-ci-challenge:latest .
+
+      - name: Scan image with Trivy
+        uses: aquasecurity/trivy-action@v0.8.0
+        with:
+          image-ref: secure-ci-challenge:latest
+          format: table
+          severity: HIGH,CRITICAL
+          exit-code: 1   # IMPORTANT: make job fail if HIGH/CRITICAL found
+
+      - name: Fail if secrets found in repo (extra safety)
+        # optional: a simple grep to show any obvious secrets (not a replacement for semgrep)
+        run: |
+          if grep -R --line-number -E "SECRET|API_KEY|pk_live|DB_PASSWORD" .; then
+            echo "Potential secrets found in repo — failing job"
+            exit 1
+          else
+            echo "No obvious secrets found by basic grep"
+          fi
