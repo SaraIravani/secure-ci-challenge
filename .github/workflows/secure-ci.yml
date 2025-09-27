@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3.38.0
 
       - name: Set up Node.js (cache deps)
         uses: actions/setup-node@v3
@@ -27,7 +27,7 @@ jobs:
           # optional: add severity threshold or custom rules
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v0.21.0
 
       - name: Build Docker image
         run: docker build -t secure-ci-challenge:latest .
