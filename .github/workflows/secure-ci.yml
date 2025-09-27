@@ -21,9 +21,10 @@ jobs:
         run: npm ci || npm install
 
       - name: Run Semgrep (static code analysis)
-        uses: returntocorp/semgrep-action@v1
+        uses: returntocorp/semgrep-action@v1.13.0
         with:
-          config: "p/ci"   # use standard CI rules including secret-detection
+          config: "p/ci, security-audit, secrets"  
+          fail_on_severity: ERROR  # use standard CI rules including secret-detection
           # optional: add severity threshold or custom rules
 
       - name: Set up Docker Buildx
