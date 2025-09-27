@@ -21,7 +21,7 @@ jobs:
         run: npm ci || npm install
 
       - name: Run Semgrep (static code analysis)
-        uses: returntocorp/semgrep@v1.137.1
+        uses: returntocorp/semgrep-action@v1
         with:
           config: "p/ci, security-audit, secrets"  
           fail_on_severity: ERROR  # use standard CI rules including secret-detection
