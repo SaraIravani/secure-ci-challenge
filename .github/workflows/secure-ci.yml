@@ -21,7 +21,7 @@ jobs:
         run: npm ci || npm install
 
       - name: Run Semgrep (static code analysis)
-        uses: semgrep/semgrep@v1.138.0
+        uses: returntocorp/semgrep-action@v1
         with:
           config: "p/ci, security-audit, secrets"  
           publishToken: ${{ secrets.GITHUB_TOKEN }}  # use standard CI rules including secret-detection
