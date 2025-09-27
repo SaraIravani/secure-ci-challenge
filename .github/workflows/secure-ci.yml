@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.38.0
+        uses: actions/checkout@v4
 
       - name: Set up Node.js (cache deps)
         uses: actions/setup-node@v3
@@ -21,7 +21,7 @@ jobs:
         run: npm ci || npm install
 
       - name: Run Semgrep (static code analysis)
-        uses: returntocorp/semgrep-action@v2
+        uses: returntocorp/semgrep-action@v3
         with:
           config: "p/ci"   # use standard CI rules including secret-detection
           # optional: add severity threshold or custom rules
@@ -33,7 +33,7 @@ jobs:
         run: docker build -t secure-ci-challenge:latest .
 
       - name: Scan image with Trivy
-        uses: aquasecurity/trivy-action@v0.8.0
+        uses: aquasecurity/trivy-action@0.28.0
         with:
           image-ref: secure-ci-challenge:latest
           format: table
