@@ -6,11 +6,6 @@ This project is designed for anyone looking to learn how to integrate **security
 
 ---
 
-## 🚀 Project Structure
-
-
----
-
 ## 🔧 Features
 
 - **Static code analysis** with Semgrep  
@@ -35,28 +30,6 @@ The `app.js` file contains intentional vulnerabilities for educational purposes:
 
 > These issues are intentional and meant for learning how tools like Semgrep and Trivy catch them.
 
----
-
-## 📦 Getting Started
-
-1. **Clone the repository:**
-```bash
-git clone https://github.com/your-username/secure-ci-challenge.git
-cd secure-ci-challenge
-## 📈 Learning Goals
-
-- Integrate **security scanning** into CI/CD pipelines  
-- Understand the difference between **static code analysis** and **image scanning**  
-- Learn how **vulnerabilities appear in Node.js apps**  
-- Gain confidence in **DevSecOps practices** even with small demo projects  
-
----
-
-## 🌟 Notes
-
-- **Educational project only** — not for production use  
-- Focus on **learning CI/CD security best practices**  
-- Explore, experiment, and understand the tools  
 
 ---
 
