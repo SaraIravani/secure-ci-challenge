@@ -47,7 +47,7 @@ jobs:
           exit-code: 0   # IMPORTANT: make job fail if HIGH/CRITICAL found
       - name: Upload Trivy report
         if: ${{ always() }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: trivy-report
           path: ./trivy-report.txt
