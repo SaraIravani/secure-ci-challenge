@@ -41,12 +41,13 @@ jobs:
         uses: aquasecurity/trivy-action@0.21.0
         with:
           image-ref: secure-ci-challenge:latest
-          format: table
+          format: json
+          output: ./trivy-report.txt
           severity: HIGH,CRITICAL
           exit-code: 0   # IMPORTANT: make job fail if HIGH/CRITICAL found
       - name: Upload Trivy report
         if: ${{ always() }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: trivy-report
           path: ./trivy-report.txt
