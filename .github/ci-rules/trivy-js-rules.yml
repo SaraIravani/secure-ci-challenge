@@ -1,1 +1,15 @@
+python - <<'EOF'
+import json
 
+with open("trivy.json") as f:
+    data = json.load(f)
+
+vulns = []
+for result in data.get("Results", []):
+    for v in result.get("Vulnerabilities", []):
+        vulns.append((v.get("VulnerabilityID"), v.get("PkgName"), v.get("InstalledVersion"), v.get("Severity"), v.get("FixedVersion")))
+
+print(f"Total vulnerabilities: {len(vulns)}")
+for v in vulns[:20]:  # 20 تا اول
+    print(f"{v[0]} {v[1]} {v[2]} [{v[3]}] -> Fix: {v[4] or 'none'}")
+EOF
