@@ -23,8 +23,8 @@ jobs:
       - name: Run Semgrep (static code analysis)
         uses: returntocorp/semgrep-action@v1
         with:
-          config:  "p/ci, p/security-audit, p/secrets"  
-          publishToken: ${{ secrets.GITHUB_TOKEN }} # use standard CI rules including secret-detection
+          config:  "p/ci,p/security-audit,p/secrets" 
+          publishToken: ""  # use standard CI rules including secret-detection
           # optional: add severity threshold or custom rules
 
       - name: Set up Docker Buildx
