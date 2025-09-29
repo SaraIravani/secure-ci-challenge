@@ -1,0 +1,15 @@
+python - <<'EOF'
+import json
+
+with open("semgrep.json") as f:
+    data = json.load(f)
+
+for r in data.get("results", []):
+    path = r.get("path")
+    start = r.get("start", {}).get("line")
+    end = r.get("end", {}).get("line")
+    severity = r.get("extra", {}).get("severity")
+    rule = r.get("check_id") or r.get("rule_id")
+    msg = r.get("extra", {}).get("message")
+    print(f"{path}:{start}-{end} [{severity}] {rule} — {msg}")
+EOF
