@@ -26,7 +26,7 @@ jobs:
           config:  |
             p/ci
             p/security-audit
-            p/secrets" 
+            p/secrets
           publishToken: ""  # use standard CI rules including secret-detection
           # optional: add severity threshold or custom rules
 
